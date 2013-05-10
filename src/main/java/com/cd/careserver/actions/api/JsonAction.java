@@ -1,10 +1,13 @@
-package com.cd.careserver.actions;
+package com.cd.careserver.actions.api;
 
+import org.apache.struts2.convention.annotation.Result;
+import org.apache.struts2.convention.annotation.Results;
 import org.james.common.utils.ajax.Reply;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-public class BaseAction extends ActionSupport {
+@Results({ @Result(name = "json", type = "json", params = { "root", "reply" }) })
+public class JsonAction extends ActionSupport {
 
 	private static final long serialVersionUID = 8256468859982232293L;
 
