@@ -17,6 +17,12 @@ public class BaseAction extends ActionSupport {
 		reply.setMsg("It Works!!");
 		return JSON;
 	}
+	
+	public String invalidUser(){
+		reply.setMsg("Invalid user!");
+		reply.setCode(0);
+		return JSON;
+	}
 
 	public Reply getReply() {
 		return reply;

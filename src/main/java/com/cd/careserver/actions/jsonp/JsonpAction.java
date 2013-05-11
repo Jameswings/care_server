@@ -3,10 +3,10 @@ package com.cd.careserver.actions.jsonp;
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 
-import com.cd.careserver.actions.api.JsonAction;
+import com.cd.careserver.actions.BaseAction;
 
 @Results({ @Result(name = "jsonp", type = "json", params = { "root", "reply.callback" }) })
-public class JsonpAction extends JsonAction {
+public class JsonpAction extends BaseAction {
 
 	private static final long serialVersionUID = 8709805605273167406L;
 
