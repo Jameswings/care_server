@@ -33,6 +33,16 @@ public class BaseAction extends ActionSupport {
 		reply.setSuccess(true);
 		reply.setMsg(msg);
 	}
+	
+	protected void setFailure(){
+		this.setFailure("");
+	}
+	
+	protected void setFailure(String msg){
+		reply.setCode(0);
+		reply.setSuccess(false);
+		reply.setMsg(msg);
+	}
 
 	public Reply getReply() {
 		return reply;
