@@ -4,7 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.cd.careserver.actions.BaseAction;
+import com.cd.careserver.action.BaseAction;
 import com.cd.careserver.po.User;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
@@ -42,9 +42,9 @@ public class AuthInterceptor implements Interceptor {
 				ServletActionContext.getRequest().getSession()
 						.setAttribute(User.SESSION_USER_KEY, u);
 				result = invocation.invoke();
-			}else{
-				BaseAction ba = (BaseAction)invocation.getAction();
-				return ba.invalidUser();
+			} else {
+				BaseAction ba = (BaseAction) invocation.getAction();
+				result = ba.invalidUser();
 			}
 		} else {
 			result = invocation.invoke();

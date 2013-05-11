@@ -1,4 +1,4 @@
-package com.cd.careserver.actions.api;
+package com.cd.careserver.action.api;
 
 import org.apache.struts2.ServletActionContext;
 

@@ -1,4 +1,4 @@
-package com.cd.careserver.actions;
+package com.cd.careserver.action;
 
 import org.james.common.utils.ajax.Reply;
 
@@ -22,6 +22,16 @@ public class BaseAction extends ActionSupport {
 		reply.setMsg("Invalid user!");
 		reply.setCode(0);
 		return JSON;
+	}
+	
+	protected void setSuccess(){
+		this.setSuccess("");
+	}
+	
+	protected void setSuccess(String msg){
+		reply.setCode(1);
+		reply.setSuccess(true);
+		reply.setMsg(msg);
 	}
 
 	public Reply getReply() {

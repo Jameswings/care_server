@@ -19,12 +19,12 @@
     <!-- The blank extension allows you to match directory listings as well 
         as pure action names -->
     <!-- without interfering with static resources. -->
-    <constant name="struts.action.extension" value="action" />
+<!--     <constant name="struts.action.extension" value="action" /> -->
 
     <!-- Load custom default resource bundles -->
     <constant name="struts.custom.i18n.resources" value="messages," />
 
-    <package name="default" extends="json-default">
+    <package name="convention" extends="json-default">
     	<interceptors>
     		<interceptor name="auth" class="com.cd.careserver.interceptor.AuthInterceptor" />
     		
@@ -34,9 +34,11 @@
         </interceptor-stack>
     	</interceptors>
 
-		<default-interceptor-ref name="authStack"></default-interceptor-ref>
+		  <default-interceptor-ref name="authStack"></default-interceptor-ref>
 
     </package>
+    
+    
     
 <!--     <package name="uploader" namespace="/uploader" extends="default"> -->
 <!--         <default-interceptor-ref name="fileUploadStack"/> -->
