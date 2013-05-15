@@ -12,7 +12,12 @@ public class JsonAction extends BaseAction {
 	private static final long serialVersionUID = 8256468859982232293L;
 
 	public static final String JSON = "json";
-	public static final String JSONP = "jsonp";
+	
+	@Override
+	public String invalidUser() {
+		this.setFailure("Invalid User!");
+		return JSON;
+	}
 
 	public String execute() {
 		reply.setMsg("It Works!!");
