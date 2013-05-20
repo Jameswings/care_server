@@ -4,6 +4,7 @@ import java.util.Date;
 
 public class Doctor {
 	private String id;
+	private String userId;
 	private String name;
 	private String title;
 	private String iden;
@@ -66,5 +67,11 @@ public class Doctor {
 	}
 	public void setCreationTime(Date creationTime) {
 		this.creationTime = creationTime;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

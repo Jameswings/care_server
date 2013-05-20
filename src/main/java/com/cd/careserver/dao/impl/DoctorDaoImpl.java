@@ -15,13 +15,13 @@ import com.cd.careserver.po.Doctor;
 public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 	private static final String SQL_FIND_ALL = "SELECT * FROM doctor";
 
-	private static final String SQL_INSERT_DOCTOR = "INSERT INTO doctor(id,name,title,"
+	private static final String SQL_INSERT_DOCTOR = "INSERT INTO doctor(id,user_id,name,title,"
 			+ "iden,nick_name,sex,cell_phone,phone,creation_time) "
-			+ "VALUES(?,?,?,?,?,?,?,?,?)";
+			+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String SQL_DELETE_DOCTOR = "DELETE FROM doctor WHERE id=?";
 
-	private static final String SQL_UPDATE_DOCTOR = "UPDATE doctor SET name=?,title=?,"
+	private static final String SQL_UPDATE_DOCTOR = "UPDATE doctor SET user_id=?,name=?,title=?,"
 			+ "iden=?,nick_name=?,sex=?,cell_phone=?,phone=?,creation_time=? WHERE id=?";
 
 	private static final String SQL_FIND_DOCTOR_BY_ID = "SELECT * FROM doctor WHERE id=?";
@@ -30,6 +30,7 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 		public Doctor mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Doctor doctor = new Doctor();
 			doctor.setId(rs.getString("id"));
+			doctor.setUserId(rs.getString("user_id"));
 			doctor.setName(rs.getString("name"));
 			doctor.setTitle(rs.getString("title"));
 			doctor.setIden(rs.getString("iden"));
@@ -57,12 +58,12 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 		doctor.setId(createId());
 		if (update(
 				SQL_INSERT_DOCTOR,
-				new Object[] { doctor.getId(), doctor.getName(),
-						doctor.getTitle(), doctor.getIden(),
+				new Object[] { doctor.getId(), doctor.getUserId(),
+						doctor.getName(), doctor.getTitle(), doctor.getIden(),
 						doctor.getNickName(), new Integer(doctor.getSex()),
 						doctor.getCellPhone(), doctor.getPhone(),
 						doctor.getCreationTime() }, new int[] { Types.CHAR,
-						Types.VARCHAR, Types.VARCHAR, Types.CHAR,
+						Types.CHAR, Types.VARCHAR, Types.VARCHAR, Types.CHAR,
 						Types.VARCHAR, Types.INTEGER, Types.VARCHAR,
 						Types.VARCHAR, Types.TIMESTAMP }) > 0) {
 			return doctor.getId();
@@ -82,14 +83,14 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 	public String update(Doctor doctor) {
 		if (update(
 				SQL_UPDATE_DOCTOR,
-				new Object[] { doctor.getName(), doctor.getTitle(),
-						doctor.getIden(), doctor.getNickName(),
-						new Integer(doctor.getSex()), doctor.getCellPhone(),
-						doctor.getPhone(), doctor.getCreationTime(),
-						doctor.getId() }, new int[] { Types.VARCHAR,
-						Types.VARCHAR, Types.CHAR, Types.VARCHAR,
-						Types.INTEGER, Types.VARCHAR, Types.VARCHAR,
-						Types.TIMESTAMP, Types.CHAR }) > 0) {
+				new Object[] { doctor.getUserId(), doctor.getName(),
+						doctor.getTitle(), doctor.getIden(),
+						doctor.getNickName(), new Integer(doctor.getSex()),
+						doctor.getCellPhone(), doctor.getPhone(),
+						doctor.getCreationTime(), doctor.getId() }, new int[] {
+						Types.CHAR, Types.VARCHAR, Types.VARCHAR, Types.CHAR,
+						Types.VARCHAR, Types.INTEGER, Types.VARCHAR,
+						Types.VARCHAR, Types.TIMESTAMP, Types.CHAR }) > 0) {
 			return doctor.getId();
 		} else {
 			return null;

@@ -15,13 +15,13 @@ import com.cd.careserver.po.Customer;
 public class CustomerDaoImpl extends BasicDao<Customer> implements CustomerDao {
 	private static final String SQL_FIND_ALL = "SELECT * FROM customer";
 
-	private static final String SQL_INSERT_CUSTOMER = "INSERT INTO customer(id,name,type,"
+	private static final String SQL_INSERT_CUSTOMER = "INSERT INTO customer(id,user_id,name,type,"
 			+ "iden,nick_name,sex,age,cell_phone,phone,creation_time) "
-			+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
+			+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
 
 	private static final String SQL_DELETE_CUSTOMER = "DELETE FROM customer WHERE id=?";
 
-	private static final String SQL_UPDATE_CUSTOMER = "UPDATE customer SET name=?,type=?,"
+	private static final String SQL_UPDATE_CUSTOMER = "UPDATE customer SET user_id=?,name=?,type=?,"
 			+ "iden=?,nick_name=?,sex=?,age=?,cell_phone=?,phone=?,creation_time=? WHERE id=?";
 
 	private static final String SQL_FIND_CUSTOMER_BY_ID = "SELECT * FROM customer WHERE id=?";
@@ -31,6 +31,7 @@ public class CustomerDaoImpl extends BasicDao<Customer> implements CustomerDao {
 		public Customer mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Customer customer = new Customer();
 			customer.setId(rs.getString("id"));
+			customer.setUserId(rs.getString("user_id"));
 			customer.setName(rs.getString("name"));
 			customer.setType(rs.getInt("type"));
 			customer.setIden(rs.getString("iden"));
@@ -59,13 +60,14 @@ public class CustomerDaoImpl extends BasicDao<Customer> implements CustomerDao {
 		customer.setId(createId());
 		if (update(
 				SQL_INSERT_CUSTOMER,
-				new Object[] { customer.getId(), customer.getName(),
-						new Integer(customer.getType()), customer.getIden(),
-						customer.getNickName(), new Integer(customer.getSex()),
+				new Object[] { customer.getId(), customer.getUserId(),
+						customer.getName(), new Integer(customer.getType()),
+						customer.getIden(), customer.getNickName(),
+						new Integer(customer.getSex()),
 						new Integer(customer.getAge()),
 						customer.getCellPhone(), customer.getPhone(),
 						customer.getCreationTime() }, new int[] { Types.CHAR,
-						Types.VARCHAR, Types.INTEGER, Types.CHAR,
+						Types.CHAR, Types.VARCHAR, Types.INTEGER, Types.CHAR,
 						Types.VARCHAR, Types.INTEGER, Types.INTEGER,
 						Types.VARCHAR, Types.VARCHAR, Types.TIMESTAMP }) > 0) {
 			return customer.getId();
@@ -85,16 +87,16 @@ public class CustomerDaoImpl extends BasicDao<Customer> implements CustomerDao {
 	public String update(Customer customer) {
 		if (update(
 				SQL_UPDATE_CUSTOMER,
-				new Object[] { customer.getName(),
+				new Object[] { customer.getUserId(), customer.getName(),
 						new Integer(customer.getType()), customer.getIden(),
 						customer.getNickName(), new Integer(customer.getSex()),
 						new Integer(customer.getAge()),
 						customer.getCellPhone(), customer.getPhone(),
 						customer.getCreationTime(), customer.getId() },
-				new int[] { Types.VARCHAR, Types.INTEGER, Types.CHAR,
-						Types.VARCHAR, Types.INTEGER, Types.INTEGER,
-						Types.VARCHAR, Types.VARCHAR, Types.TIMESTAMP,
-						Types.CHAR }) > 0) {
+				new int[] { Types.CHAR, Types.VARCHAR, Types.INTEGER,
+						Types.CHAR, Types.VARCHAR, Types.INTEGER,
+						Types.INTEGER, Types.VARCHAR, Types.VARCHAR,
+						Types.TIMESTAMP, Types.CHAR }) > 0) {
 			return customer.getId();
 		} else {
 			return null;
