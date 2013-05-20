@@ -1,4 +1,4 @@
-package com.cd.careserver.dao;
+package com.cd.careserver.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,6 +10,7 @@ import org.james.common.utils.dao.BasicDao;
 import org.james.common.utils.dao.MultiRowMapper;
 import org.james.common.utils.dao.SingleRowMapper;
 
+import com.cd.careserver.dao.PendingRequestDao;
 import com.cd.careserver.po.PendingRequest;
 
 public class PendingRequestDaoImpl extends BasicDao<PendingRequest> implements

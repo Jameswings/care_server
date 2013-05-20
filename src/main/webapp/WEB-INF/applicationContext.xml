@@ -201,7 +201,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
    	<!-- Daos -->
    	<!-- Daos -->
-	<bean id="pendingRequestDao" class="com.cd.careserver.dao.PendingRequestDaoImpl">
+	<bean id="pendingRequestDao" class="com.cd.careserver.dao.impl.PendingRequestDaoImpl">
 		<property name="dataSource" ref="c3p0DataSource" />
 	</bean>
 <!-- 	<bean id="gtvIdDao" class="jp.co.fcctvweb.daos.GtvIdDaoImpl"> -->

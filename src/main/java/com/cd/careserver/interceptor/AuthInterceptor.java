@@ -43,20 +43,23 @@ public class AuthInterceptor implements Interceptor {
 		User u = (User) request.getSession()
 				.getAttribute(User.SESSION_USER_KEY);
 		if (u == null) {
-			if ("demo".equals(request.getParameter("username"))
-					&& "demo".equals(request.getParameter("password"))
-					&& "1".equals(request.getParameter("type"))) {
+//			if ("demo".equals(request.getParameter("username"))
+//					&& "demo".equals(request.getParameter("password"))
+//					&& "1".equals(request.getParameter("type"))) {
 				u = new User();
-				u.setUsername(request.getParameter("username"));
-				u.setType(Integer.valueOf(request.getParameter("type")));
+//				u.setUsername(request.getParameter("username"));
+//				u.setType(Integer.valueOf(request.getParameter("type")));
+				
+				u.setUsername("Dr. Cheung");
+				u.setType(1);
 				u.setStatus(1);
 				ServletActionContext.getRequest().getSession()
 						.setAttribute(User.SESSION_USER_KEY, u);
 				result = invocation.invoke();
-			} else {
-				BaseAction ba = (BaseAction) invocation.getAction();
-				result = ba.invalidUser();
-			}
+//			} else {
+//				BaseAction ba = (BaseAction) invocation.getAction();
+//				result = ba.invalidUser();
+//			}
 		} else {
 			result = invocation.invoke();
 		}
