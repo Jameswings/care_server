@@ -78,15 +78,15 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	</bean>
   <bean id="c3p0DS" class="com.mchange.v2.c3p0.ComboPooledDataSource"
     destroy-method="close">
-<!--     <property name="driverClass" value="com.mysql.jdbc.Driver" /> -->
-<!--     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/care_server?autoReconnect=true&amp;unicode=true&amp;characterEncoding=utf8" /> -->
-<!--     <property name="user" value="root" /> -->
-<!--     <property name="password" value="root" /> -->
+    <property name="driverClass" value="com.mysql.jdbc.Driver" />
+    <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/care_server?autoReconnect=true&amp;unicode=true&amp;characterEncoding=utf8" />
+    <property name="user" value="root" />
+    <property name="password" value="root" />
     
-    <property name="driverClass" value="${jdbc.rdbms.driver}" />
-    <property name="jdbcUrl" value="${jdbc.rdbms.url}" />
-    <property name="user" value="${jdbc.rdbms.user}" />
-    <property name="password" value="${jdbc.rdbms.password}" />
+<!--     <property name="driverClass" value="${jdbc.rdbms.driver}" /> -->
+<!--     <property name="jdbcUrl" value="${jdbc.rdbms.url}" /> -->
+<!--     <property name="user" value="${jdbc.rdbms.user}" /> -->
+<!--     <property name="password" value="${jdbc.rdbms.password}" /> -->
 
     <!--连接池中保留的最小连接数。 -->
     <property name="minPoolSize" value="10" />

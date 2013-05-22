@@ -27,11 +27,13 @@
     <package name="convention" extends="json-default">
     	<interceptors>
     		<interceptor name="auth" class="com.cd.careserver.interceptor.AuthInterceptor" />
+    		<interceptor name="jsonpWrapper" class="com.cd.careserver.interceptor.JsonpWrapperInterceptor"></interceptor>
     		
     		<interceptor-stack name="authStack">
           <interceptor-ref name="basicStack"/>
           <interceptor-ref name="auth"/>
         </interceptor-stack>
+        
     	</interceptors>
 
 		  <default-interceptor-ref name="authStack"></default-interceptor-ref>

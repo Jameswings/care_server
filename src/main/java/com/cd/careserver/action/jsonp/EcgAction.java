@@ -19,6 +19,6 @@ public class EcgAction extends JsonpAction {
 		
 		this.setSuccess();
 		reply.setValue(list);
-		return JSONP;
+		return writeJsonp();
 	}
 }

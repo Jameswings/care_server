@@ -6,6 +6,7 @@ public class User {
 	
 	private String id;
 	private String username;
+	private String password;
 	private int status;
 	private int type;
 	
@@ -32,5 +33,11 @@ public class User {
 	}
 	public void setType(int type) {
 		this.type = type;
+	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }

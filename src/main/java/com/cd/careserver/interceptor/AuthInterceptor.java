@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.cd.careserver.action.BaseAction;
 import com.cd.careserver.action.jsonp.JsonpAction;
+import com.cd.careserver.action.jsonp.SystemAction;
 import com.cd.careserver.po.User;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;
@@ -30,15 +30,7 @@ public class AuthInterceptor implements Interceptor {
 	public String intercept(ActionInvocation invocation) throws Exception {
 		String result = "json";
 		
-		// here means that: there is in JSONP writer
-		if ("writeJsonp".equals(invocation.getProxy().getMethod())){
-			return invocation.invoke();
-		}
-		
 		HttpServletRequest request = ServletActionContext.getRequest();
-		if (invocation.getAction() instanceof JsonpAction){
-			request.getSession().setAttribute(JsonpAction.REPLY_KEY, ((JsonpAction) invocation.getAction()).getReply());
-		}
 		
 		User u = (User) request.getSession()
 				.getAttribute(User.SESSION_USER_KEY);

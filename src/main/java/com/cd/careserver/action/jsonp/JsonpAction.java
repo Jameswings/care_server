@@ -16,8 +16,7 @@ import org.james.common.utils.ajax.Reply;
 import com.cd.careserver.action.BaseAction;
 
 @Results({ 
-	@Result(name = "jsonp", type = "chain", params = { "actionName", "jsonp", "namespace", "/jsonp", "method", "writeJsonp" }),
-	@Result(name = "json", type = "json")
+	@Result(name = "jsonp", type = "json")
 	})
 public class JsonpAction extends BaseAction {
 
@@ -30,14 +29,12 @@ public class JsonpAction extends BaseAction {
 	@Override
 	public String invalidUser() {
 		setFailure("Invalid User!");
-		return JSONP;
+		return writeJsonp();
 	}
 	
 	public String writeJsonp(){
 
 		HttpServletResponse response = ServletActionContext.getResponse();
-		HttpSession session = ServletActionContext.getRequest().getSession();
-		this.setReply((Reply)session.getAttribute(REPLY_KEY));
 		String content = JSONObject.fromObject(reply).toString();
 		String cb = reply.getCallback();
 	    if (cb != null){
@@ -55,7 +52,7 @@ public class JsonpAction extends BaseAction {
 			e.printStackTrace();
 		}
 		
-		return JSON;
+		return JSONP;
 	}
 
 	public String getCallback() {
