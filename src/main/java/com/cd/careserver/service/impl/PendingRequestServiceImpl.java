@@ -1,7 +1,8 @@
-package com.cd.careserver.service;
+package com.cd.careserver.service.impl;
 
 import com.cd.careserver.dao.PendingRequestDao;
 import com.cd.careserver.po.PendingRequest;
+import com.cd.careserver.service.PendingRequestService;
 
 public class PendingRequestServiceImpl implements PendingRequestService {
 	

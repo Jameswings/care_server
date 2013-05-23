@@ -81,12 +81,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <property name="driverClass" value="com.mysql.jdbc.Driver" />
     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/care_server?autoReconnect=true&amp;unicode=true&amp;characterEncoding=utf8" />
     <property name="user" value="root" />
-    <property name="password" value="root" />
-    
-<!--     <property name="driverClass" value="${jdbc.rdbms.driver}" /> -->
-<!--     <property name="jdbcUrl" value="${jdbc.rdbms.url}" /> -->
-<!--     <property name="user" value="${jdbc.rdbms.user}" /> -->
-<!--     <property name="password" value="${jdbc.rdbms.password}" /> -->
+    <property name="password" value="" />
 
     <!--连接池中保留的最小连接数。 -->
     <property name="minPoolSize" value="10" />
@@ -183,53 +178,33 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 
 	<!-- Beans -->
 	<!-- Beans -->
-	<bean id="pendingRequestService" class="com.cd.careserver.service.PendingRequestServiceImpl" >
+	<bean id="pendingRequestService" class="com.cd.careserver.service.impl.PendingRequestServiceImpl" >
 		<property name="pendingRequestDao" ref="pendingRequestDao" />
 	</bean>
-<!-- 	<bean id="gtvService" class="jp.co.fcctvweb.services.GtvServiceImpl" > -->
-<!-- 		<property name="gtvIdDao" ref="gtvIdDao" /> -->
-<!-- 		<property name="channelDao" ref="channelDao" /> -->
-<!-- 		<property name="statisticDao" ref="statisticDao" /> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="uploadInfoService" class="jp.co.fcctvweb.services.UploadInfoServiceImpl" > -->
-<!-- 		<property name="uploadInfoDao" ref="uploadInfoDao" /> -->
-<!-- 	</bean> -->
-<!--     <bean id="myDocService" class="jp.co.fcctvweb.services.MyDocServiceImpl" > -->
-<!--         <property name="fileDao" ref="fileDao" /> -->
-<!--         <property name="folderDao" ref="folderDao" /> -->
-<!--     </bean> -->
-<!--     <bean id="sysStatausServiceImpl" class="jp.co.fcctvweb.services.SysStatausServiceImpl" > -->
-<!--         <property name="sysStatusDao" ref="sysStatusDao" /> -->
-<!--     </bean> -->
-    
-    
+  <bean id="systemService" class="com.cd.careserver.service.impl.SystemServiceImpl" >
+    <property name="userDao" ref="userDao" />
+  </bean>
+  <bean id="doctorService" class="com.cd.careserver.service.impl.DoctorServiceImpl" >
+    <property name="doctorDao" ref="doctorDao" />
+  </bean>
+  <bean id="customerService" class="com.cd.careserver.service.impl.CustomerServiceImpl" >
+    <property name="customerDao" ref="customerDao" />
+  </bean>
 
    	<!-- Daos -->
    	<!-- Daos -->
 	<bean id="pendingRequestDao" class="com.cd.careserver.dao.impl.PendingRequestDaoImpl">
 		<property name="dataSource" ref="c3p0DataSource" />
 	</bean>
-<!-- 	<bean id="gtvIdDao" class="jp.co.fcctvweb.daos.GtvIdDaoImpl"> -->
-<!-- 		<property name="dataSource" ref="c3p0DS" /> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="channelDao" class="jp.co.fcctvweb.daos.ChannelDaoImpl"> -->
-<!-- 		<property name="dataSource" ref="c3p0DS" /> -->
-<!-- 	</bean> -->
-<!-- 	<bean id="uploadInfoDao" class="jp.co.fcctvweb.daos.UploadInfoDaoImpl"> -->
-<!-- 		<property name="dataSource" ref="c3p0DS" /> -->
-<!-- 	</bean> -->
-<!--     <bean id="fileDao" class="jp.co.fcctvweb.daos.FileDaoImpl"> -->
-<!--         <property name="dataSource" ref="c3p0DS" /> -->
-<!--     </bean> -->
-<!--     <bean id="folderDao" class="jp.co.fcctvweb.daos.FolderDaoImpl"> -->
-<!--         <property name="dataSource" ref="c3p0DS" /> -->
-<!--     </bean> -->
-<!--     <bean id="statisticDao" class="jp.co.fcctvweb.daos.StatisticDaoImpl"> -->
-<!--         <property name="dataSource" ref="c3p0DS" /> -->
-<!--     </bean> -->
-<!--     <bean id="sysStatusDao" class="jp.co.fcctvweb.daos.SysStatusDaoImpl"> -->
-<!--         <property name="dataSource" ref="c3p0DS" /> -->
-<!--     </bean> -->
+  <bean id="userDao" class="com.cd.careserver.dao.impl.UserDaoImpl">
+    <property name="dataSource" ref="c3p0DataSource" />
+  </bean>
+  <bean id="customerDao" class="com.cd.careserver.dao.impl.CustomerDaoImpl">
+    <property name="dataSource" ref="c3p0DataSource" />
+  </bean>
+  <bean id="doctorDao" class="com.cd.careserver.dao.impl.DoctorDaoImpl">
+    <property name="dataSource" ref="c3p0DataSource" />
+  </bean>
 	
 </beans>
 

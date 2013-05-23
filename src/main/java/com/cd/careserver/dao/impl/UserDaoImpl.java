@@ -20,17 +20,19 @@ public class UserDaoImpl extends BasicDao<User> implements UserDao {
 
 	private static final String SQL_DELETE_USER = "DELETE FROM users WHERE id=?";
 
-	private static final String SQL_UPDATE_USER = "UPDATE users SET username=?,password=?,"
+	private static final String SQL_UPDATE_USER = "UPDATE users SET username=?,"
 			+ "status=?,type=? WHERE id=?";
 
 	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
+
+	private static final String SQL_FIND_BY_USERNAME_PASSWORD = "SELECT * FROM users WHERE username=? AND password=?";
 
 	private static class UserMultiRowMapper implements MultiRowMapper<User> {
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
 			user.setId(rs.getString("id"));
 			user.setUsername(rs.getString("username"));
-			user.setPassword(rs.getString("password"));
+			// user.setPassword(rs.getString("password"));
 			user.setStatus(rs.getInt("status"));
 			user.setType(rs.getInt("type"));
 			return user;
@@ -71,13 +73,10 @@ public class UserDaoImpl extends BasicDao<User> implements UserDao {
 	}
 
 	public String update(User user) {
-		if (update(
-				SQL_UPDATE_USER,
-				new Object[] { user.getUsername(), user.getPassword(),
-						new Integer(user.getStatus()),
-						new Integer(user.getType()), user.getId() }, new int[] {
-						Types.VARCHAR, Types.CHAR, Types.INTEGER,
-						Types.INTEGER, Types.CHAR }) > 0) {
+		if (update(SQL_UPDATE_USER, new Object[] { user.getUsername(),
+				new Integer(user.getStatus()), new Integer(user.getType()),
+				user.getId() }, new int[] { Types.VARCHAR, Types.INTEGER,
+				Types.INTEGER, Types.CHAR }) > 0) {
 			return user.getId();
 		} else {
 			return null;
@@ -89,4 +88,9 @@ public class UserDaoImpl extends BasicDao<User> implements UserDao {
 				new UserSingleRowMapper());
 	}
 
+	@Override
+	public User findByUsernameAndPwd(String username, String password) {
+		return (User) query(SQL_FIND_BY_USERNAME_PASSWORD, new String[] {
+				username, password }, new UserSingleRowMapper());
+	}
 }

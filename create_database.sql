@@ -1,6 +1,6 @@
 /*==============================================================*/
 /* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2013/5/11 16:34:20                           */
+/* Created on:     2013/5/23 9:44:50                            */
 /*==============================================================*/
 
 
@@ -56,6 +56,7 @@ create table account
 create table customer
 (
    id                   char(32) not null,
+   user_id              char(32),
    name                 varchar(64),
    type                 int(2),
    iden                 char(18),
@@ -126,6 +127,7 @@ create table doc_cus
 create table doctor
 (
    id                   char(32) not null,
+   user_id              char(32),
    name                 varchar(64),
    title                varchar(32),
    iden                 char(18),
