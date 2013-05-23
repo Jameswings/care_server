@@ -8,7 +8,7 @@ public class CustomerAction extends JsonpAction {
 	private CustomerService customerService;
 	
 	public String getCustomerList(){
-		
+		reply.setValue(customerService.getAllCustomers());
 		return writeJsonp();
 	}
 
