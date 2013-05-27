@@ -2,6 +2,7 @@ package com.cd.careserver.action.api;
 
 import org.apache.struts2.ServletActionContext;
 
+import com.cd.careserver.action.json.JsonAction;
 import com.cd.careserver.po.User;
 
 

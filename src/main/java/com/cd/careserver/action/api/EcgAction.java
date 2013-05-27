@@ -3,6 +3,7 @@ package com.cd.careserver.action.api;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.cd.careserver.action.json.JsonAction;
 import com.cd.careserver.config.Config;
 
 public class EcgAction extends JsonAction {

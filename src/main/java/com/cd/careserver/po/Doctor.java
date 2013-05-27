@@ -3,6 +3,8 @@ package com.cd.careserver.po;
 import java.util.Date;
 
 public class Doctor {
+	public static final String SESSION_KEY = "com.cd.careserver.po.Doctor";
+	
 	private String id;
 	private String userId;
 	private String name;

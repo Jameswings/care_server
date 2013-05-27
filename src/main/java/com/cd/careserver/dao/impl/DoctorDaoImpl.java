@@ -25,6 +25,8 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 			+ "iden=?,nick_name=?,sex=?,cell_phone=?,phone=?,creation_time=? WHERE id=?";
 
 	private static final String SQL_FIND_DOCTOR_BY_ID = "SELECT * FROM doctor WHERE id=?";
+	
+	private static final String SQL_FIND_BY_USER_ID = "SELECT * FROM doctor WHERE user_id=?";
 
 	private static class DoctorMultiRowMapper implements MultiRowMapper<Doctor> {
 		public Doctor mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -99,6 +101,11 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 
 	public Doctor findById(String doctorId) {
 		return (Doctor) query(SQL_FIND_DOCTOR_BY_ID, doctorId,
+				new DoctorSingleRowMapper());
+	}
+	
+	public Doctor findByUserId(String userId){
+		return (Doctor) query(SQL_FIND_BY_USER_ID, userId,
 				new DoctorSingleRowMapper());
 	}
 }

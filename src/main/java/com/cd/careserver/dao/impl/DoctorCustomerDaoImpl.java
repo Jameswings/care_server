@@ -2,7 +2,6 @@ package com.cd.careserver.dao.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Types;
 import java.util.List;
 
 import org.james.common.utils.dao.BasicDao;
@@ -15,10 +14,10 @@ import com.cd.careserver.po.DoctorCustomer;
 public class DoctorCustomerDaoImpl extends BasicDao<DoctorCustomer> implements
 		DoctorCustomerDao {
 
-	private static final String SQL_FIND_ALL = "SELECT * FROM doc_cus";
-
-	private static final String SQL_FIND_DOCTORCUSTOMER_BY_ID = "SELECT * FROM doc_cus WHERE id=?";
-
+	private static final String SQL_FIND_BY_DOCTOR_ID = "SELECT * FROM doc_cus WHERE doctor_id=?";
+	
+	private static final String SQL_FIND_BY_CUSTOMER_ID = "SELECT * FROM doc_cus WHERE customer_id=?";
+	
 	private static class DoctorCustomerMultiRowMapper implements
 			MultiRowMapper<DoctorCustomer> {
 		public DoctorCustomer mapRow(ResultSet rs, int rowNum)
@@ -38,13 +37,12 @@ public class DoctorCustomerDaoImpl extends BasicDao<DoctorCustomer> implements
 			return new DoctorCustomerMultiRowMapper().mapRow(rs, 1);
 		}
 	}
-
-	public List<DoctorCustomer> findAll() {
-		return query(SQL_FIND_ALL, new DoctorCustomerMultiRowMapper());
+	
+	public List<DoctorCustomer> findByDoctorId(String docId) {
+		return query(SQL_FIND_BY_DOCTOR_ID, docId, new DoctorCustomerMultiRowMapper());
 	}
-
-	public DoctorCustomer findById(String doctorCustomerId) {
-		return (DoctorCustomer) query(SQL_FIND_DOCTORCUSTOMER_BY_ID,
-				doctorCustomerId, new DoctorCustomerSingleRowMapper());
+	
+	public List<DoctorCustomer> findByCustomerId(String cusId) {
+		return query(SQL_FIND_BY_CUSTOMER_ID, cusId, new DoctorCustomerMultiRowMapper());
 	}
 }

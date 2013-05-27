@@ -189,6 +189,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
   </bean>
   <bean id="customerService" class="com.cd.careserver.service.impl.CustomerServiceImpl" >
     <property name="customerDao" ref="customerDao" />
+    <property name="doctorCustomerDao" ref="doctorCustomerDao" />
   </bean>
 
    	<!-- Daos -->
@@ -205,6 +206,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
   <bean id="doctorDao" class="com.cd.careserver.dao.impl.DoctorDaoImpl">
     <property name="dataSource" ref="c3p0DataSource" />
   </bean>
-	
+	<bean id="doctorCustomerDao" class="com.cd.careserver.dao.impl.DoctorCustomerDaoImpl">
+    <property name="dataSource" ref="c3p0DataSource" />
+  </bean>
+  
 </beans>
 

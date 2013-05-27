@@ -1,5 +1,6 @@
 package com.cd.careserver.action.api;
 
+import com.cd.careserver.action.json.JsonAction;
 import com.cd.careserver.po.PendingRequest;
 import com.cd.careserver.service.PendingRequestService;
 

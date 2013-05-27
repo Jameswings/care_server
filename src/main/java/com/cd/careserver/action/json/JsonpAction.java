@@ -1,4 +1,4 @@
-package com.cd.careserver.action.jsonp;
+package com.cd.careserver.action.json;
 
 import java.io.IOException;
 import java.io.Writer;
@@ -15,9 +15,10 @@ import org.james.common.utils.ajax.Reply;
 
 import com.cd.careserver.action.BaseAction;
 
+
 @Results({ 
 	@Result(name = "jsonp", type = "json")
-	})
+})
 public class JsonpAction extends BaseAction {
 
 	private static final long serialVersionUID = 8709805605273167406L;

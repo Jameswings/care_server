@@ -4,8 +4,8 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
 
-import com.cd.careserver.action.jsonp.JsonpAction;
-import com.cd.careserver.action.jsonp.SystemAction;
+import com.cd.careserver.action.json.JsonpAction;
+import com.cd.careserver.action.json.SystemAction;
 import com.cd.careserver.po.User;
 import com.opensymphony.xwork2.ActionInvocation;
 import com.opensymphony.xwork2.interceptor.Interceptor;

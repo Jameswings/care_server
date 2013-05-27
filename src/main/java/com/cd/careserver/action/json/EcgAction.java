@@ -1,11 +1,12 @@
-package com.cd.careserver.action.jsonp;
+package com.cd.careserver.action.json;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class EcgAction extends JsonpAction {
+
+public class EcgAction extends JsonAction {
 
 	private static final long serialVersionUID = 7639168962676328389L;
 
@@ -19,6 +20,6 @@ public class EcgAction extends JsonpAction {
 		
 		this.setSuccess();
 		reply.setValue(list);
-		return writeJsonp();
+		return JSON;
 	}
 }

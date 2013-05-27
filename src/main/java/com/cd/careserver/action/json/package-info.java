@@ -1,6 +1,6 @@
 @ParentPackage("convention")  
-@Namespace("/jsonp")
-package com.cd.careserver.action.jsonp;
+@Namespace("/json")
+package com.cd.careserver.action.json;
 
 import org.apache.struts2.convention.annotation.Namespace;
 import org.apache.struts2.convention.annotation.ParentPackage;

@@ -1,10 +1,11 @@
-package com.cd.careserver.action.api;
+package com.cd.careserver.action.json;
 
 import org.apache.struts2.convention.annotation.Result;
 import org.apache.struts2.convention.annotation.Results;
 import org.james.common.utils.ajax.Reply;
 
 import com.cd.careserver.action.BaseAction;
+
 
 @Results({ @Result(name = "json", type = "json", params = { "root", "reply" }) })
 public class JsonAction extends BaseAction {

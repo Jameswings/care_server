@@ -15,4 +15,6 @@ public interface DoctorDao {
 	String insert(Doctor doctor);
 
 	List<Doctor> findAll();
+
+	Doctor findByUserId(String userId);
 }
