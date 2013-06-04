@@ -34,7 +34,7 @@ public class EcgDecoder {
         FileOutputStream fos = null;
 
         try {
-            client.connect("183.45.31.253");
+            client.connect("localhost");
             client.login("jamescheung", " ");
 
             //

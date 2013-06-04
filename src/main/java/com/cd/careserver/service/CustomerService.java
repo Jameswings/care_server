@@ -10,6 +10,8 @@ public interface CustomerService {
 
 	List<Customer> getAllCustomers();
 
-	List<CustomerInfo> getCustomersByDoc(Doctor doc);
+	List<CustomerInfo> getCustomersByDocId(String docId);
+
+	boolean setCustomerMonitored(CustomerInfo ci);
 
 }

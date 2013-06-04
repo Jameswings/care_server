@@ -10,4 +10,9 @@ public interface DoctorCustomerDao {
 
 	List<DoctorCustomer> findByCustomerId(String cusId);
 
+	int insert(DoctorCustomer dc);
+	
+	int delete(DoctorCustomer dc);
+
+	DoctorCustomer findByDocIdAndCustomerId(String docId, String cusId);
 }

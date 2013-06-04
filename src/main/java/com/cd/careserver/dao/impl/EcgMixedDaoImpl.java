@@ -1,0 +1,77 @@
+package com.cd.careserver.dao.impl;
+
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
+
+import org.james.common.utils.dao.BasicDao;
+import org.james.common.utils.dao.MapRowMapper;
+import org.james.common.utils.dao.MultiRowMapper;
+import org.james.common.utils.dao.SingleRowMapper;
+
+import com.cd.careserver.dao.EcgMixedDao;
+import com.cd.careserver.vo.EcgInfo;
+
+public class EcgMixedDaoImpl extends BasicDao<EcgInfo> implements EcgMixedDao {
+	
+	private static final String FIND_BY_CUSTOMER_ID = "SELECT e.*, r.* " +
+			"FROM ecg_data AS e LEFT JOIN doctor_ecg AS r ON e.id = r.ecg_id";
+	
+	private static final String FIND_BY_DOCTOR_ID = "SELECT e.*, r.* " +
+			"FROM ecg_data AS e LEFT JOIN doctor_ecg AS r ON e.id = r.ecg_id INNER JOIN doc_cus AS dc ON e.customer_id = dc.customer_id" +
+			" WHERE dc.doctor_id = ?";
+	
+	private static final String COUNT_BY_CONDITION_GROUP_BY_DATE = "SELECT DATE_FORMAT(e.creation_time,'%Y-%m-%d') AS date, count(1) AS number " +
+			" FROM ecg_data AS e LEFT JOIN doctor_ecg AS r ON e.id = r.ecg_id INNER JOIN doc_cus AS dc ON e.customer_id = dc.customer_id " +
+			" WHERE dc.doctor_id=? AND r.id IS NULL ";
+	
+
+	private static class EcgMultiRowMapper implements MultiRowMapper<EcgInfo> {
+		public EcgInfo mapRow(ResultSet rs, int rowNum) throws SQLException {
+			EcgInfo ecgData = new EcgInfo();
+			ecgData.setId(rs.getString("e.id"));
+			ecgData.setCustomerId(rs.getString("e.customer_id"));
+			ecgData.setFileLocation(rs.getString("e.file_location"));
+			ecgData.setCreationTime(rs.getTimestamp("e.creation_time"));
+			
+			ecgData.setDeId(rs.getString("r.id"));
+			ecgData.setDeAnnotation(rs.getString("r.annotation"));
+			ecgData.setDeCreationTime(rs.getTimestamp("r.creation_time"));
+			ecgData.setDeCustomerId(rs.getString("r.customer_id"));
+			ecgData.setDeDoctorId(rs.getString("r.doctor_id"));
+			ecgData.setDeStatus(rs.getInt("r.status"));
+			ecgData.setDeType(rs.getInt("r.type"));
+			
+			return ecgData;
+		}
+	}
+
+	private static class EcgSingleRowMapper implements
+			SingleRowMapper<EcgInfo> {
+		public EcgInfo mapRow(ResultSet rs) throws SQLException {
+			return new EcgMultiRowMapper().mapRow(rs, 1);
+		}
+	}
+	
+	@SuppressWarnings("unchecked")
+	private static class EcgMapRowMapper<K, V> implements MapRowMapper<K, V>{
+		public K mapRowKey(ResultSet rs, int rowNum)
+	            throws SQLException{
+			return (K) rs.getString("date");
+		}
+
+	    public V mapRowValue(ResultSet rs, int rowNum)
+	            throws SQLException{
+	    	return (V) Integer.valueOf(rs.getInt("number"));
+	    }
+	}
+	
+	public List<EcgInfo> findByDoctorId(String docId){
+		return query(FIND_BY_DOCTOR_ID, docId, new EcgMultiRowMapper());
+	}
+	
+	public Map<String, Integer> countUnreadNumber(String docId){
+		return queryForMap(COUNT_BY_CONDITION_GROUP_BY_DATE + " GROUP BY DATE_FORMAT(e.creation_time,'%Y-%m-%d')", new String[]{docId}, new EcgMapRowMapper<String, Integer>());
+	}
+}

@@ -1,6 +1,7 @@
 package com.cd.careserver.action.json;
 
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 
 import org.apache.struts2.ServletActionContext;
@@ -13,44 +14,32 @@ public class CustomerAction extends JsonAction {
 
 	private CustomerService customerService;
 	
-	private List<CustomerInfo> customerList = new ArrayList<CustomerInfo>();
+//	private List<CustomerInfo> customerList = new ArrayList<CustomerInfo>();
 	
-	private List<String> testList = new ArrayList<String>();
+	private CustomerInfo customer;
 	
 	public String getCustomerInfo(){
 		if (getSessionDoctor() != null){
-			reply.setValue(customerService.getCustomersByDoc(getSessionDoctor()));
+			reply.setValue(customerService.getCustomersByDocId(getSessionDoctor().getId()));
 		}
 		
 		return JSON;
 	}
 	
 	public String saveCustomerMonitored(){
-		System.out.println(ServletActionContext.getRequest().getParameter("customerList"));
-		System.out.println(customerList);
-		System.out.println(ServletActionContext.getRequest().getParameter("testList"));
-		System.out.println(testList);
+		boolean result = customerService.setCustomerMonitored(customer);
+		if (!result){
+			setFailure("Error");
+		}
 		return JSON;
 	}
-
-	public void setCustomerList(List<CustomerInfo> customerList) {
-		this.customerList = customerList;
-	}
 	
-	public Object getModel(){
-		return customerList;
+	public CustomerInfo getCustomer() {
+		return customer;
 	}
 
-	public List<CustomerInfo> getCustomerList() {
-		return customerList;
-	}
-
-	public List<String> getTestList() {
-		return testList;
-	}
-
-	public void setTestList(List<String> testList) {
-		this.testList = testList;
+	public void setCustomer(CustomerInfo customer) {
+		this.customer = customer;
 	}
 
 	public void setCustomerService(CustomerService customerService) {

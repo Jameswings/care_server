@@ -1,12 +1,15 @@
 package com.cd.careserver.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.cd.careserver.dict.Sex;
 import com.cd.careserver.po.Customer;
 import com.cd.careserver.po.DoctorCustomer;
 
-public class CustomerInfo {
+public class CustomerInfo implements Serializable {
+	private static final long serialVersionUID = -1309879755698194299L;
+	
 	// basic customer fields
 	private String id;
 	private String userId;
@@ -27,6 +30,10 @@ public class CustomerInfo {
 	// relation mark
 	private int mark;
 	private String note;
+	
+	// doc info
+	private String docId;
+	private String docName;
 	
 	public CustomerInfo(){}
 	
@@ -175,5 +182,21 @@ public class CustomerInfo {
 
 	public void setNote(String note) {
 		this.note = note;
+	}
+
+	public String getDocId() {
+		return docId;
+	}
+
+	public void setDocId(String docId) {
+		this.docId = docId;
+	}
+
+	public String getDocName() {
+		return docName;
+	}
+
+	public void setDocName(String docName) {
+		this.docName = docName;
 	}
 }

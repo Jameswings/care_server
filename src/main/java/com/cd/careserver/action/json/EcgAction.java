@@ -5,11 +5,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.cd.careserver.service.EcgService;
+import com.cd.careserver.vo.EcgInfo;
+
 
 public class EcgAction extends JsonAction {
 
 	private static final long serialVersionUID = 7639168962676328389L;
 
+	private EcgService ecgService;
+	
 	public String restoreEcgNumber(){
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		
@@ -18,8 +23,18 @@ public class EcgAction extends JsonAction {
 		dataMap.put("number", 5);
 		list.add(dataMap);
 		
+		if (getSessionDoctor() != null){
+//			List<EcgInfo> eiList = ecgService.getEcgInfoByCondition(getSessionDoctor().getId());
+//			for (ei)
+			reply.setValue(ecgService.countUnreadByCondition(getSessionDoctor().getId()));
+		}
+		
 		this.setSuccess();
-		reply.setValue(list);
+		
 		return JSON;
+	}
+
+	public void setEcgService(EcgService ecgService) {
+		this.ecgService = ecgService;
 	}
 }
