@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import com.cd.careserver.service.EcgService;
-import com.cd.careserver.vo.EcgInfo;
 
 
 public class EcgAction extends JsonAction {
@@ -18,16 +18,18 @@ public class EcgAction extends JsonAction {
 	public String restoreEcgNumber(){
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
 		
-		Map<String, Object> dataMap = new HashMap<String, Object>();
-		dataMap.put("date", "2013-05-16");
-		dataMap.put("number", 5);
-		list.add(dataMap);
-		
 		if (getSessionDoctor() != null){
-//			List<EcgInfo> eiList = ecgService.getEcgInfoByCondition(getSessionDoctor().getId());
-//			for (ei)
-			reply.setValue(ecgService.countUnreadByCondition(getSessionDoctor().getId()));
+			Map<String, Integer> map = ecgService.countUnreadByCondition(getSessionDoctor().getId());
+			
+			Map<String, Object> data;
+			for (Entry<String, Integer> entry: map.entrySet()){
+				data = new HashMap<String, Object>();
+				data.put("date", entry.getKey());
+				data.put("number", entry.getValue());
+				list.add(data);
+			}
 		}
+		reply.setValue(list);
 		
 		this.setSuccess();
 		
