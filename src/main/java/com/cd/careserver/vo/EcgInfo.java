@@ -2,6 +2,8 @@ package com.cd.careserver.vo;
 
 import java.util.Date;
 
+import com.cd.careserver.dict.Sex;
+
 public class EcgInfo {
 
 	// ecg_data
@@ -18,6 +20,17 @@ public class EcgInfo {
 	private int deStatus;
 	private String deAnnotation;
 	private Date deCreationTime;
+	
+	// customerInfo
+	private String cuName;
+	private String cuNickname;
+	private Date cuCreationTime;
+	private int cuSex;
+	private String cuSexStr;
+	private String cuIden;
+	private int cuAge;
+	private String cuCellPhone;
+	private String cuPhone;
 	
 	private boolean read = false;
 	
@@ -92,5 +105,60 @@ public class EcgInfo {
 	}
 	public boolean isRead() {
 		return read;
+	}
+	public String getCuName() {
+		return cuName;
+	}
+	public void setCuName(String cuName) {
+		this.cuName = cuName;
+	}
+	public String getCuNickname() {
+		return cuNickname;
+	}
+	public void setCuNickname(String cuNickname) {
+		this.cuNickname = cuNickname;
+	}
+	public Date getCuCreationTime() {
+		return cuCreationTime;
+	}
+	public void setCuCreationTime(Date cuCreationTime) {
+		this.cuCreationTime = cuCreationTime;
+	}
+	public int getCuSex() {
+		return cuSex;
+	}
+	public void setCuSex(int cuSex) {
+		this.cuSex = cuSex;
+		this.cuSexStr = Sex.valueOf(cuSex).toI18nString();
+	}
+	public String getCuSexStr() {
+		return cuSexStr;
+	}
+	public void setCuSexStr(String cuSexStr) {
+		this.cuSexStr = cuSexStr;
+	}
+	public String getCuIden() {
+		return cuIden;
+	}
+	public void setCuIden(String cuIden) {
+		this.cuIden = cuIden;
+	}
+	public int getCuAge() {
+		return cuAge;
+	}
+	public void setCuAge(int cuAge) {
+		this.cuAge = cuAge;
+	}
+	public String getCuCellPhone() {
+		return cuCellPhone;
+	}
+	public void setCuCellPhone(String cuCellPhone) {
+		this.cuCellPhone = cuCellPhone;
+	}
+	public String getCuPhone() {
+		return cuPhone;
+	}
+	public void setCuPhone(String cuPhone) {
+		this.cuPhone = cuPhone;
 	}
 }

@@ -1,12 +1,14 @@
 package com.cd.careserver.action.json;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
 import com.cd.careserver.service.EcgService;
+import com.cd.careserver.vo.EcgInfo;
 
 
 public class EcgAction extends JsonAction {
@@ -32,6 +34,16 @@ public class EcgAction extends JsonAction {
 		reply.setValue(list);
 		
 		this.setSuccess();
+		
+		return JSON;
+	}
+	
+	public String getEcgList(){
+		List<EcgInfo> list = Collections.emptyList();
+		if (getSessionDoctor() != null){
+			list = ecgService.getEcgInfoByCondition(getSessionDoctor().getId());
+		}
+		reply.setValue(list);
 		
 		return JSON;
 	}

@@ -18,12 +18,14 @@ public class EcgMixedDaoImpl extends BasicDao<EcgInfo> implements EcgMixedDao {
 	private static final String FIND_BY_CUSTOMER_ID = "SELECT e.*, r.* " +
 			"FROM ecg_data AS e LEFT JOIN doctor_ecg AS r ON e.id = r.ecg_id";
 	
-	private static final String FIND_BY_DOCTOR_ID = "SELECT e.*, r.* " +
-			"FROM ecg_data AS e LEFT JOIN doctor_ecg AS r ON e.id = r.ecg_id INNER JOIN doc_cus AS dc ON e.customer_id = dc.customer_id" +
+	private static final String FIND_BY_DOCTOR_ID = "SELECT e.*, r.*, cu.* " +
+			"FROM ecg_data AS e LEFT JOIN doctor_ecg AS r ON e.id = r.ecg_id " +
+			" INNER JOIN doc_cus AS dc ON e.customer_id = dc.customer_id " +
+			" INNER JOIN customer AS cu ON e.customer_id = cu.id " +
 			" WHERE dc.doctor_id = ?";
 	
 	private static final String COUNT_BY_CONDITION_GROUP_BY_DATE = "SELECT DATE_FORMAT(e.creation_time,'%Y-%m-%d') AS date, count(1) AS number " +
-			" FROM ecg_data AS e LEFT JOIN doctor_ecg AS r ON e.id = r.ecg_id INNER JOIN doc_cus AS dc ON e.customer_id = dc.customer_id " +
+			" FROM ecg_data AS e LEFT JOIN doctor_ecg AS r ON e.id = r.ecg_id INNER JOIN doc_cus AS dc ON e.customer_id = dc.customer_id" +
 			" WHERE dc.doctor_id=? AND r.id IS NULL ";
 	
 
@@ -42,6 +44,15 @@ public class EcgMixedDaoImpl extends BasicDao<EcgInfo> implements EcgMixedDao {
 			ecgData.setDeDoctorId(rs.getString("r.doctor_id"));
 			ecgData.setDeStatus(rs.getInt("r.status"));
 			ecgData.setDeType(rs.getInt("r.type"));
+			
+			ecgData.setCuAge(rs.getInt("cu.age"));
+			ecgData.setCuCellPhone(rs.getString("cu.cell_phone"));
+			ecgData.setCuCreationTime(rs.getTimestamp("cu.creation_time"));
+			ecgData.setCuIden(rs.getString("cu.iden"));
+			ecgData.setCuName(rs.getString("cu.name"));
+			ecgData.setCuNickname(rs.getString("cu.nick_name"));
+			ecgData.setCuPhone(rs.getString("cu.phone"));
+			ecgData.setCuSex(rs.getInt("cu.sex"));
 			
 			return ecgData;
 		}
