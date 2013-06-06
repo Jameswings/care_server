@@ -2,6 +2,8 @@ package com.cd.careserver.vo;
 
 import java.util.Date;
 
+import org.apache.struts2.json.annotations.JSON;
+
 import com.cd.careserver.dict.Sex;
 
 public class EcgInfo {
@@ -52,6 +54,7 @@ public class EcgInfo {
 	public void setFileLocation(String fileLocation) {
 		this.fileLocation = fileLocation;
 	}
+	@JSON(format="yyyy-MM-dd'T'HH:mm:ssZ")
 	public Date getCreationTime() {
 		return creationTime;
 	}
