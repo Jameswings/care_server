@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import com.cd.careserver.condition.EcgCondition;
 import com.cd.careserver.service.EcgService;
 import com.cd.careserver.vo.EcgInfo;
 
@@ -15,7 +16,8 @@ public class EcgAction extends JsonAction {
 
 	private static final long serialVersionUID = 7639168962676328389L;
 
-	private EcgService ecgService;
+	private String startDate;
+	private String endDate;
 	
 	public String restoreEcgNumber(){
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -41,14 +43,35 @@ public class EcgAction extends JsonAction {
 	public String getEcgList(){
 		List<EcgInfo> list = Collections.emptyList();
 		if (getSessionDoctor() != null){
-			list = ecgService.getEcgInfoByCondition(getSessionDoctor().getId());
+			EcgCondition con = new EcgCondition();
+			con.setDoctorId(getSessionDoctor().getId());
+			con.setStartDate(startDate);
+			con.setEndDate(endDate);
+			list = ecgService.getEcgInfoByCondition(con);
 		}
 		reply.setValue(list);
 		
 		return JSON;
 	}
-
+	
+	private EcgService ecgService;
 	public void setEcgService(EcgService ecgService) {
 		this.ecgService = ecgService;
+	}
+
+	public String getStartDate() {
+		return startDate;
+	}
+
+	public void setStartDate(String startDate) {
+		this.startDate = startDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 }

@@ -3,6 +3,7 @@ package com.cd.careserver.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import com.cd.careserver.condition.EcgCondition;
 import com.cd.careserver.dao.EcgDataDao;
 import com.cd.careserver.dao.EcgMixedDao;
 import com.cd.careserver.service.EcgService;
@@ -12,8 +13,8 @@ public class EcgServiceImpl implements EcgService {
 	private EcgMixedDao ecgMixedDao;
 	private EcgDataDao ecgDataDao;
 	
-	public List<EcgInfo> getEcgInfoByCondition(String docId){
-		return ecgMixedDao.findByDoctorId(docId);
+	public List<EcgInfo> getEcgInfoByCondition(EcgCondition con){
+		return ecgMixedDao.findByCondition(con);
 	}
 	
 	public Map<String, Integer> countUnreadByCondition(String docId){
