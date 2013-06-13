@@ -1,15 +1,12 @@
 package com.cd.careserver.vo;
 
-import java.io.Serializable;
 import java.util.Date;
 
 import com.cd.careserver.dict.Sex;
 import com.cd.careserver.po.Customer;
 import com.cd.careserver.po.DoctorCustomer;
 
-public class CustomerInfo implements Serializable {
-	private static final long serialVersionUID = -1309879755698194299L;
-	
+public class CustomerInfo {
 	// basic customer fields
 	private String id;
 	private String userId;
