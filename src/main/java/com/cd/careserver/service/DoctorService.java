@@ -6,4 +6,6 @@ public interface DoctorService {
 
 	Doctor getDoctorByUserId(String userId);
 
+	String addDoctor(Doctor doctor);
+
 }

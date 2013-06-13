@@ -1,8 +1,3 @@
-/*==============================================================*/
-/* DBMS name:      MySQL 5.0                                    */
-/* Created on:     2013/5/23 9:44:50                            */
-/*==============================================================*/
-
 
 drop table if exists account;
 
@@ -38,9 +33,7 @@ drop table if exists response_history;
 
 drop table if exists users;
 
-/*==============================================================*/
-/* Table: account                                               */
-/*==============================================================*/
+
 create table account
 (
    id                   char(32) not null,
@@ -50,9 +43,6 @@ create table account
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: customer                                              */
-/*==============================================================*/
 create table customer
 (
    id                   char(32) not null,
@@ -69,9 +59,6 @@ create table customer
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: customer_contact                                      */
-/*==============================================================*/
 create table customer_contact
 (
    id                   char(32) not null,
@@ -84,9 +71,6 @@ create table customer_contact
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: customer_details                                      */
-/*==============================================================*/
 create table customer_details
 (
    id                   char(32) not null,
@@ -97,9 +81,6 @@ create table customer_details
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: diagnosis                                             */
-/*==============================================================*/
 create table diagnosis
 (
    id                   char(32) not null,
@@ -109,9 +90,6 @@ create table diagnosis
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: doc_cus                                               */
-/*==============================================================*/
 create table doc_cus
 (
    doctor_id            char(32) not null,
@@ -121,9 +99,6 @@ create table doc_cus
    primary key (doctor_id, customer_id)
 );
 
-/*==============================================================*/
-/* Table: doctor                                                */
-/*==============================================================*/
 create table doctor
 (
    id                   char(32) not null,
@@ -133,15 +108,13 @@ create table doctor
    iden                 char(18),
    nick_name            varchar(64),
    sex                  int(1),
+   age                  int(3),
    cell_phone           varchar(20),
    phone                varchar(20),
    creation_time        datetime,
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: doctor_ecg                                            */
-/*==============================================================*/
 create table doctor_ecg
 (
    id                   char(32) not null,
@@ -155,9 +128,6 @@ create table doctor_ecg
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: ecg_data                                              */
-/*==============================================================*/
 create table ecg_data
 (
    id                   char(32) not null,
@@ -167,9 +137,6 @@ create table ecg_data
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: ecg_details                                           */
-/*==============================================================*/
 create table ecg_details
 (
    id                   char(32) not null,
@@ -177,9 +144,6 @@ create table ecg_details
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: notice                                                */
-/*==============================================================*/
 create table notice
 (
    id                   char(32) not null,
@@ -194,9 +158,6 @@ create table notice
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: notice_history                                        */
-/*==============================================================*/
 create table notice_history
 (
    id                   char(32) not null,
@@ -213,9 +174,6 @@ create table notice_history
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: pending_request                                       */
-/*==============================================================*/
 create table pending_request
 (
    id                   char(32) not null,
@@ -230,9 +188,6 @@ create table pending_request
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: pending_response                                      */
-/*==============================================================*/
 create table pending_response
 (
    id                   char(32) not null,
@@ -247,9 +202,6 @@ create table pending_response
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: request_history                                       */
-/*==============================================================*/
 create table request_history
 (
    id                   char(32) not null,
@@ -266,9 +218,6 @@ create table request_history
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: response_history                                      */
-/*==============================================================*/
 create table response_history
 (
    id                   char(32) not null,
@@ -285,9 +234,6 @@ create table response_history
    primary key (id)
 );
 
-/*==============================================================*/
-/* Table: users                                                 */
-/*==============================================================*/
 create table users
 (
    id                   char(32) not null,

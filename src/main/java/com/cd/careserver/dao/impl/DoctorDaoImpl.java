@@ -16,16 +16,16 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 	private static final String SQL_FIND_ALL = "SELECT * FROM doctor";
 
 	private static final String SQL_INSERT_DOCTOR = "INSERT INTO doctor(id,user_id,name,title,"
-			+ "iden,nick_name,sex,cell_phone,phone,creation_time) "
-			+ "VALUES(?,?,?,?,?,?,?,?,?,?)";
+			+ "iden,nick_name,sex,age,cell_phone,phone,creation_time) "
+			+ "VALUES(?,?,?,?,?,?,?,?,?,?,now())";
 
 	private static final String SQL_DELETE_DOCTOR = "DELETE FROM doctor WHERE id=?";
 
 	private static final String SQL_UPDATE_DOCTOR = "UPDATE doctor SET user_id=?,name=?,title=?,"
-			+ "iden=?,nick_name=?,sex=?,cell_phone=?,phone=?,creation_time=? WHERE id=?";
+			+ "iden=?,nick_name=?,sex=?,age=?,cell_phone=?,phone=? WHERE id=?";
 
 	private static final String SQL_FIND_DOCTOR_BY_ID = "SELECT * FROM doctor WHERE id=?";
-	
+
 	private static final String SQL_FIND_BY_USER_ID = "SELECT * FROM doctor WHERE user_id=?";
 
 	private static class DoctorMultiRowMapper implements MultiRowMapper<Doctor> {
@@ -38,6 +38,7 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 			doctor.setIden(rs.getString("iden"));
 			doctor.setNickName(rs.getString("nick_name"));
 			doctor.setSex(rs.getInt("sex"));
+			doctor.setAge(rs.getInt("age"));
 			doctor.setCellPhone(rs.getString("cell_phone"));
 			doctor.setPhone(rs.getString("phone"));
 			doctor.setCreationTime(rs.getTimestamp("creation_time"));
@@ -63,11 +64,11 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 				new Object[] { doctor.getId(), doctor.getUserId(),
 						doctor.getName(), doctor.getTitle(), doctor.getIden(),
 						doctor.getNickName(), new Integer(doctor.getSex()),
-						doctor.getCellPhone(), doctor.getPhone(),
-						doctor.getCreationTime() }, new int[] { Types.CHAR,
+						new Integer(doctor.getAge()), doctor.getCellPhone(),
+						doctor.getPhone() }, new int[] { Types.CHAR,
 						Types.CHAR, Types.VARCHAR, Types.VARCHAR, Types.CHAR,
-						Types.VARCHAR, Types.INTEGER, Types.VARCHAR,
-						Types.VARCHAR, Types.TIMESTAMP }) > 0) {
+						Types.VARCHAR, Types.INTEGER, Types.INTEGER,
+						Types.VARCHAR, Types.VARCHAR }) > 0) {
 			return doctor.getId();
 		} else {
 			return null;
@@ -88,11 +89,12 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 				new Object[] { doctor.getUserId(), doctor.getName(),
 						doctor.getTitle(), doctor.getIden(),
 						doctor.getNickName(), new Integer(doctor.getSex()),
-						doctor.getCellPhone(), doctor.getPhone(),
-						doctor.getCreationTime(), doctor.getId() }, new int[] {
-						Types.CHAR, Types.VARCHAR, Types.VARCHAR, Types.CHAR,
-						Types.VARCHAR, Types.INTEGER, Types.VARCHAR,
-						Types.VARCHAR, Types.TIMESTAMP, Types.CHAR }) > 0) {
+						new Integer(doctor.getAge()), doctor.getCellPhone(),
+						doctor.getPhone(), doctor.getCreationTime(),
+						doctor.getId() }, new int[] { Types.CHAR,
+						Types.VARCHAR, Types.VARCHAR, Types.CHAR,
+						Types.VARCHAR, Types.INTEGER, Types.INTEGER,
+						Types.VARCHAR, Types.VARCHAR, Types.CHAR }) > 0) {
 			return doctor.getId();
 		} else {
 			return null;
@@ -103,8 +105,8 @@ public class DoctorDaoImpl extends BasicDao<Doctor> implements DoctorDao {
 		return (Doctor) query(SQL_FIND_DOCTOR_BY_ID, doctorId,
 				new DoctorSingleRowMapper());
 	}
-	
-	public Doctor findByUserId(String userId){
+
+	public Doctor findByUserId(String userId) {
 		return (Doctor) query(SQL_FIND_BY_USER_ID, userId,
 				new DoctorSingleRowMapper());
 	}

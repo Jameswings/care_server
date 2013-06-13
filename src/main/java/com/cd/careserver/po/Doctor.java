@@ -12,6 +12,7 @@ public class Doctor {
 	private String iden;
 	private String nickName;
 	private int sex;
+	private int age;
 	private String cellPhone;
 	private String phone;
 	private Date creationTime;
@@ -51,6 +52,12 @@ public class Doctor {
 	}
 	public void setSex(int sex) {
 		this.sex = sex;
+	}
+	public int getAge() {
+		return age;
+	}
+	public void setAge(int age) {
+		this.age = age;
 	}
 	public String getCellPhone() {
 		return cellPhone;

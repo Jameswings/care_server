@@ -11,6 +11,10 @@ public class DoctorServiceImpl implements DoctorService {
 	public Doctor getDoctorByUserId(String userId){
 		return doctorDao.findByUserId(userId);
 	}
+	
+	public String addDoctor(Doctor doctor){
+		return doctorDao.insert(doctor);
+	}
 
 	public void setDoctorDao(DoctorDao doctorDao) {
 		this.doctorDao = doctorDao;

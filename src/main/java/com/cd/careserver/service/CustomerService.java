@@ -14,4 +14,6 @@ public interface CustomerService {
 
 	boolean setCustomerMonitored(CustomerInfo ci);
 
+	String addCustomer(Customer customer);
+
 }

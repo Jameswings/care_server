@@ -59,6 +59,10 @@ public class CustomerServiceImpl implements CustomerService {
 		}
 		return result;
 	}
+	
+	public String addCustomer(Customer customer){
+		return customerDao.insert(customer);
+	}
 
 	public void setCustomerDao(CustomerDao customerDao) {
 		this.customerDao = customerDao;
