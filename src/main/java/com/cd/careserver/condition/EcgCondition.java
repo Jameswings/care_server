@@ -3,7 +3,7 @@ package com.cd.careserver.condition;
 public class EcgCondition extends AbstractCondition {
 
 	private String doctorId;
-	private boolean isRead;
+	private boolean unRead;
 	
 	@Override
 	public boolean isUsePaging() {
@@ -18,11 +18,11 @@ public class EcgCondition extends AbstractCondition {
 		this.doctorId = doctorId;
 	}
 
-	public boolean isRead() {
-		return isRead;
+	public boolean isUnRead() {
+		return unRead;
 	}
 
-	public void setRead(boolean isRead) {
-		this.isRead = isRead;
+	public void setUnRead(boolean unRead) {
+		this.unRead = unRead;
 	}
 }

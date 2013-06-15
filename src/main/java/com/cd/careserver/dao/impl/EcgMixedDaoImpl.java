@@ -80,7 +80,7 @@ public class EcgMixedDaoImpl extends BasicDao<EcgInfo> implements EcgMixedDao {
 
 	public List<EcgInfo> findByCondition(EcgCondition con) {
 		SqlHandler handler = new SqlHandler(FIND_ALL, false);
-		handler.and("r.doctor_id=?", con.getDoctorId(), Types.VARCHAR,
+		handler.and("dc.doctor_id=?", con.getDoctorId(), Types.VARCHAR,
 				!Validators.isEmpty(con.getDoctorId()));
 		if (Validators.isDate(con.getStartDate())) {
 			handler.and("e.creation_time >= ?",
@@ -92,6 +92,8 @@ public class EcgMixedDaoImpl extends BasicDao<EcgInfo> implements EcgMixedDao {
 					DateUtils.string2Date(con.getStartDate()), 1),
 					Types.TIMESTAMP, true);
 		}
+//		handler.and("r.id IS NULL", con.isUnRead());
+//		handler.and("cu.name LIKE ?", "%" + con.getQ() + "%", !Validators.isEmpty(con.getQ()));
 		return query(handler.getSQL(), handler.getArgs(),
 				handler.getArgTypes(), new EcgMultiRowMapper());
 	}
