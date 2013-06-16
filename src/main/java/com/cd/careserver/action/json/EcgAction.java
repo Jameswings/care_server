@@ -21,6 +21,8 @@ public class EcgAction extends JsonAction {
 	private String endDate;
 	private boolean unread;
 	private String q;
+	
+	private String ecgId;
 
 	public String restoreEcgNumber() {
 		List<Map<String, Object>> list = new ArrayList<Map<String, Object>>();
@@ -57,6 +59,11 @@ public class EcgAction extends JsonAction {
 		}
 		reply.setValue(list);
 
+		return JSON;
+	}
+	
+	public String readEcg(){
+		
 		return JSON;
 	}
 
@@ -118,5 +125,13 @@ public class EcgAction extends JsonAction {
 
 	public void setQ(String q) {
 		this.q = q;
+	}
+
+	public String getEcgId() {
+		return ecgId;
+	}
+
+	public void setEcgId(String ecgId) {
+		this.ecgId = ecgId;
 	}
 }
