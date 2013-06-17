@@ -17,4 +17,8 @@ public class Config {
 	public static String getFtpPassword() {
 		return configuration.getString("ftp.user.password");
 	}
+	
+	public static String getEcgLocalDir(){
+		return configuration.getString("ecg.local.dir");
+	}
 }

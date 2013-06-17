@@ -63,29 +63,22 @@ public class EcgAction extends JsonAction {
 	}
 	
 	public String readEcg(){
-		
+		if (getSessionDoctor() != null) {
+			if (!ecgService.readEcg(getSessionDoctor().getId(), ecgId)){
+				setFailure("Unknown errors!");
+			}
+		}
 		return JSON;
 	}
 
-	public String getwsnlist() {
-		// String[] a1 ={"a1","a2","a3","a4"};
-		// String[] b1 ={"b1","b2","b3","b4"};
-		// String[] c1 = {"c1","c2","c3","c4"};
-		//
-		// List<String[]> aa = new ArrayList<String[]>();
-		// aa.add(a1);
-		// aa.add(b1);
-		// aa.add(c1);
-
-		DataModel data = new DataDecoder()
-				.getData("c://2013-05-23_22-43-56.dat");
+	public String getEcgDataLine() {
+		DataModel data = ecgService.loadEcgData(ecgId);
 		List<int[]> dataList = new ArrayList<int[]>();
 		dataList.add(data.getV1());
 		dataList.add(data.getV3());
 		dataList.add(data.getV5());
 
 		reply.setValue(dataList);
-
 		return JSON;
 	}
 

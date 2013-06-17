@@ -124,6 +124,7 @@ create table doctor_ecg
    type                 int(2),
    status               int(2),
    annotation           varchar(128),
+   last_update          datetime,
    creation_time        datetime,
    primary key (id)
 );
