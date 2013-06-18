@@ -67,7 +67,6 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
 	<!--  </tx:attributes>-->
 	<!--</tx:advice>-->
 
-
 	<bean
 		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations">
@@ -81,7 +80,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <property name="driverClass" value="com.mysql.jdbc.Driver" />
     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/care_server?autoReconnect=true&amp;unicode=true&amp;characterEncoding=utf8" />
     <property name="user" value="root" />
-    <property name="password" value="" />
+    <property name="password" value="root" />
 
     <!--连接池中保留的最小连接数。 -->
     <property name="minPoolSize" value="10" />
@@ -194,9 +193,13 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
   <bean id="ecgService" class="com.cd.careserver.service.impl.EcgServiceImpl" >
     <property name="ecgMixedDao" ref="ecgMixedDao" />
     <property name="ecgDataDao" ref="ecgDataDao" />
+    <property name="doctorEcgDao" ref="doctorEcgDao" />
+    <property name="fileTransferService" ref="fileTransferService" />
   </bean>
   <bean id="userService" class="com.cd.careserver.service.impl.UserServiceImpl" >
     <property name="userDao" ref="userDao" />
+  </bean>
+  <bean id="fileTransferService" class="com.cd.careserver.service.impl.FileTransferServiceImpl" >
   </bean>
 
    	<!-- Daos -->
@@ -222,6 +225,8 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
   <bean id="ecgDataDao" class="com.cd.careserver.dao.impl.EcgDataDaoImpl">
     <property name="dataSource" ref="c3p0DataSource" />
   </bean>
-  
+  <bean id="doctorEcgDao" class="com.cd.careserver.dao.impl.DoctorEcgDaoImpl">
+    <property name="dataSource" ref="c3p0DataSource" />
+  </bean>
 </beans>
 
