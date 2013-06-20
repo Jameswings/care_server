@@ -48,6 +48,11 @@ public class EcgServiceImpl implements EcgService {
 				ecg.getCustomerId(), ecg.getFileLocation());
 		return new DataDecoder().getData(filepath);
 	}
+	
+	@Override
+	public String addEcg(EcgData ecg) {
+		return ecgDataDao.insert(ecg);
+	}
 
 	public void setEcgMixedDao(EcgMixedDao ecgMixedDao) {
 		this.ecgMixedDao = ecgMixedDao;

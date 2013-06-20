@@ -60,6 +60,11 @@ public class CustomerServiceImpl implements CustomerService {
 		return result;
 	}
 	
+	@Override
+	public Customer getCustomerByUserId(String userId) {
+		return customerDao.findByUserId(userId);
+	}
+	
 	public String addCustomer(Customer customer){
 		return customerDao.insert(customer);
 	}

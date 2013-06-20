@@ -4,6 +4,6 @@ import com.cd.careserver.po.User;
 
 public interface SystemService {
 
-	User login(String username, String pwd);
+	User login(int type, String username, String pwd);
 
 }

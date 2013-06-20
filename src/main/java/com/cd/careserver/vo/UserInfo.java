@@ -2,6 +2,7 @@ package com.cd.careserver.vo;
 
 public class UserInfo {
 
+	private String id;
 	private int type;
 	private String username;
 	private String nickName;
@@ -10,6 +11,7 @@ public class UserInfo {
 	private int sex;
 	private int age;
 	private String cellPhone;
+	private String targetId;
 	
 	public int getType() {
 		return type;
@@ -58,5 +60,17 @@ public class UserInfo {
 	}
 	public void setCellPhone(String cellPhone) {
 		this.cellPhone = cellPhone;
+	}
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public String getTargetId() {
+		return targetId;
+	}
+	public void setTargetId(String targetId) {
+		this.targetId = targetId;
 	}
 }

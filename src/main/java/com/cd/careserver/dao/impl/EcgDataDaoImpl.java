@@ -16,12 +16,12 @@ public class EcgDataDaoImpl extends BasicDao<EcgData> implements EcgDataDao {
 	private static final String SQL_FIND_ALL = "SELECT * FROM ecg_data";
 
 	private static final String SQL_INSERT_ECGDATA = "INSERT INTO ecg_data(id,customer_id,file_location,"
-			+ "creation_time) " + "VALUES(?,?,?,?)";
+			+ "creation_time) " + "VALUES(?,?,?,now())";
 
 	private static final String SQL_DELETE_ECGDATA = "DELETE FROM ecg_data WHERE id=?";
 
-	private static final String SQL_UPDATE_ECGDATA = "UPDATE ecg_data SET customer_id=?,file_location=?,"
-			+ "creation_time=? WHERE id=?";
+	private static final String SQL_UPDATE_ECGDATA = "UPDATE ecg_data SET customer_id=?,file_location=? "
+			+ " WHERE id=?";
 
 	private static final String SQL_FIND_ECGDATA_BY_ID = "SELECT * FROM ecg_data WHERE id=?";
 
@@ -52,9 +52,8 @@ public class EcgDataDaoImpl extends BasicDao<EcgData> implements EcgDataDao {
 		ecgData.setId(createId());
 		if (update(SQL_INSERT_ECGDATA,
 				new Object[] { ecgData.getId(), ecgData.getCustomerId(),
-						ecgData.getFileLocation(), ecgData.getCreationTime() },
-				new int[] { Types.CHAR, Types.CHAR, Types.VARCHAR,
-						Types.TIMESTAMP }) > 0) {
+						ecgData.getFileLocation() }, new int[] { Types.CHAR,
+						Types.CHAR, Types.VARCHAR }) > 0) {
 			return ecgData.getId();
 		} else {
 			return null;
@@ -70,12 +69,9 @@ public class EcgDataDaoImpl extends BasicDao<EcgData> implements EcgDataDao {
 	}
 
 	public String update(EcgData ecgData) {
-		if (update(
-				SQL_UPDATE_ECGDATA,
-				new Object[] { ecgData.getCustomerId(),
-						ecgData.getFileLocation(), ecgData.getCreationTime(),
-						ecgData.getId() }, new int[] { Types.CHAR,
-						Types.VARCHAR, Types.TIMESTAMP, Types.CHAR }) > 0) {
+		if (update(SQL_UPDATE_ECGDATA, new Object[] { ecgData.getCustomerId(),
+				ecgData.getFileLocation(), ecgData.getId() }, new int[] {
+				Types.CHAR, Types.VARCHAR, Types.CHAR }) > 0) {
 			return ecgData.getId();
 		} else {
 			return null;

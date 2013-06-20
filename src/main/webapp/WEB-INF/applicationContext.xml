@@ -201,6 +201,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
   </bean>
   <bean id="fileTransferService" class="com.cd.careserver.service.impl.FileTransferServiceImpl" >
   </bean>
+  <bean id="diagnosisService" class="com.cd.careserver.service.impl.DiagnosisServiceImpl" >
+    <property name="diagnosisDao" ref="diagnosisDao" />
+  </bean>
 
    	<!-- Daos -->
    	<!-- Daos -->
@@ -228,5 +231,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
   <bean id="doctorEcgDao" class="com.cd.careserver.dao.impl.DoctorEcgDaoImpl">
     <property name="dataSource" ref="c3p0DataSource" />
   </bean>
+  <bean id="diagnosisDao" class="com.cd.careserver.dao.impl.DiagnosisDaoImpl">
+    <property name="dataSource" ref="c3p0DataSource" />
+  </bean>
+  
 </beans>
 

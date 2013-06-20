@@ -8,8 +8,8 @@ public class SystemServiceImpl implements SystemService {
 
 	private UserDao userDao;
 	
-	public User login(String username, String pwd){
-		return userDao.findByUsernameAndPwd(username, pwd);
+	public User login(int type, String username, String pwd){
+		return userDao.findUser(type, username, pwd);
 	}
 	
 	public void setUserDao(UserDao userDao) {

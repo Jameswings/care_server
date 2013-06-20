@@ -3,7 +3,6 @@ package com.cd.careserver.service;
 import java.util.List;
 
 import com.cd.careserver.po.Customer;
-import com.cd.careserver.po.Doctor;
 import com.cd.careserver.vo.CustomerInfo;
 
 public interface CustomerService {
@@ -15,5 +14,7 @@ public interface CustomerService {
 	boolean setCustomerMonitored(CustomerInfo ci);
 
 	String addCustomer(Customer customer);
+	
+	Customer getCustomerByUserId(String userId);
 
 }

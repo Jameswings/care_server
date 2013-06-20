@@ -25,7 +25,7 @@ public class UserDaoImpl extends BasicDao<User> implements UserDao {
 
 	private static final String SQL_FIND_USER_BY_ID = "SELECT * FROM users WHERE id=?";
 
-	private static final String SQL_FIND_BY_USERNAME_PASSWORD = "SELECT * FROM users WHERE username=? AND password=?";
+	private static final String SQL_FIND_BY_TYPE_USERNAME_PASSWORD = "SELECT * FROM users WHERE type=? AND username=? AND password=?";
 
 	private static class UserMultiRowMapper implements MultiRowMapper<User> {
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -89,8 +89,9 @@ public class UserDaoImpl extends BasicDao<User> implements UserDao {
 	}
 
 	@Override
-	public User findByUsernameAndPwd(String username, String password) {
-		return (User) query(SQL_FIND_BY_USERNAME_PASSWORD, new String[] {
-				username, password }, new UserSingleRowMapper());
+	public User findUser(int type, String username, String password) {
+		return (User) query(SQL_FIND_BY_TYPE_USERNAME_PASSWORD, new Object[] {
+				type, username, password }, new int[] { Types.INTEGER,
+				Types.VARCHAR, Types.VARCHAR }, new UserSingleRowMapper());
 	}
 }

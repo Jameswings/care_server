@@ -84,7 +84,9 @@ create table customer_details
 create table diagnosis
 (
    id                   char(32) not null,
-   doctor_ecg_id        char(32),
+   ecg_id               char(32),
+   customer_id          char(32),
+   doctor_id            char(32),
    message              varchar(1024),
    creation_time        datetime,
    primary key (id)

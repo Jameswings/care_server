@@ -24,21 +24,30 @@ public abstract class BaseAction extends ActionSupport {
 	public abstract String invalidUser();
 	
 	protected void setSuccess(){
-		this.setSuccess("");
+		this.setSuccess(0, "");
 	}
 	
 	protected void setSuccess(String msg){
-		reply.setCode(1);
+		this.setSuccess(0, msg);
+	}
+	
+	protected void setSuccess(int status, String msg){
+		reply.setCode(status);
 		reply.setSuccess(true);
 		reply.setMsg(msg);
 	}
 	
 	protected void setFailure(){
-		this.setFailure("");
+		this.setFailure(999, "");
 	}
 	
 	protected void setFailure(String msg){
-		reply.setCode(0);
+		this.setFailure(999, msg);
+		
+	}
+	
+	protected void setFailure(int status, String msg){
+		reply.setCode(status);
 		reply.setSuccess(false);
 		reply.setMsg(msg);
 	}

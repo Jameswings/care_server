@@ -8,7 +8,6 @@ import org.james.common.utils.ajax.Reply;
 import com.cd.careserver.action.BaseAction;
 import com.cd.careserver.condition.AbstractCondition;
 
-
 @Results({ @Result(name = "json", type = "json", params = { "root", "reply" }) })
 public class JsonAction extends BaseAction {
 

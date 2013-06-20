@@ -17,14 +17,16 @@ public class CustomerDaoImpl extends BasicDao<Customer> implements CustomerDao {
 
 	private static final String SQL_INSERT_CUSTOMER = "INSERT INTO customer(id,user_id,name,type,"
 			+ "iden,nick_name,sex,age,cell_phone,phone,creation_time) "
-			+ "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+			+ "VALUES(?,?,?,?,?,?,?,?,?,?,now())";
 
 	private static final String SQL_DELETE_CUSTOMER = "DELETE FROM customer WHERE id=?";
 
 	private static final String SQL_UPDATE_CUSTOMER = "UPDATE customer SET user_id=?,name=?,type=?,"
-			+ "iden=?,nick_name=?,sex=?,age=?,cell_phone=?,phone=?,creation_time=? WHERE id=?";
+			+ "iden=?,nick_name=?,sex=?,age=?,cell_phone=?,phone=? WHERE id=?";
 
 	private static final String SQL_FIND_CUSTOMER_BY_ID = "SELECT * FROM customer WHERE id=?";
+
+	private static final String SQL_FIND_BY_USER_ID = "SELECT * FROM customer WHERE user_id=?";
 
 	private static class CustomerMultiRowMapper implements
 			MultiRowMapper<Customer> {
@@ -65,11 +67,11 @@ public class CustomerDaoImpl extends BasicDao<Customer> implements CustomerDao {
 						customer.getIden(), customer.getNickName(),
 						new Integer(customer.getSex()),
 						new Integer(customer.getAge()),
-						customer.getCellPhone(), customer.getPhone(),
-						customer.getCreationTime() }, new int[] { Types.CHAR,
-						Types.CHAR, Types.VARCHAR, Types.INTEGER, Types.CHAR,
-						Types.VARCHAR, Types.INTEGER, Types.INTEGER,
-						Types.VARCHAR, Types.VARCHAR, Types.TIMESTAMP }) > 0) {
+						customer.getCellPhone(), customer.getPhone() },
+				new int[] { Types.CHAR, Types.CHAR, Types.VARCHAR,
+						Types.INTEGER, Types.CHAR, Types.VARCHAR,
+						Types.INTEGER, Types.INTEGER, Types.VARCHAR,
+						Types.VARCHAR }) > 0) {
 			return customer.getId();
 		} else {
 			return null;
@@ -92,11 +94,10 @@ public class CustomerDaoImpl extends BasicDao<Customer> implements CustomerDao {
 						customer.getNickName(), new Integer(customer.getSex()),
 						new Integer(customer.getAge()),
 						customer.getCellPhone(), customer.getPhone(),
-						customer.getCreationTime(), customer.getId() },
-				new int[] { Types.CHAR, Types.VARCHAR, Types.INTEGER,
-						Types.CHAR, Types.VARCHAR, Types.INTEGER,
-						Types.INTEGER, Types.VARCHAR, Types.VARCHAR,
-						Types.TIMESTAMP, Types.CHAR }) > 0) {
+						customer.getId() }, new int[] { Types.CHAR,
+						Types.VARCHAR, Types.INTEGER, Types.CHAR,
+						Types.VARCHAR, Types.INTEGER, Types.INTEGER,
+						Types.VARCHAR, Types.VARCHAR, Types.CHAR }) > 0) {
 			return customer.getId();
 		} else {
 			return null;
@@ -108,4 +109,9 @@ public class CustomerDaoImpl extends BasicDao<Customer> implements CustomerDao {
 				new CustomerSingleRowMapper());
 	}
 
+	@Override
+	public Customer findByUserId(String userId) {
+		return (Customer) query(SQL_FIND_BY_USER_ID, userId,
+				new CustomerSingleRowMapper());
+	}
 }
