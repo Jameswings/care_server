@@ -4,21 +4,18 @@ import java.util.Date;
 
 public class Diagnosis {
 	private String id;
-	private String doctorEcgId;
 	private String message;
 	private Date creationTime;
+	private String customerId;
+	private String doctorId;
+	private String ecgId;
+	private int status;
 	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
-	}
-	public String getDoctorEcgId() {
-		return doctorEcgId;
-	}
-	public void setDoctorEcgId(String doctorEcgId) {
-		this.doctorEcgId = doctorEcgId;
 	}
 	public String getMessage() {
 		return message;
@@ -31,5 +28,29 @@ public class Diagnosis {
 	}
 	public void setCreationTime(Date creationTime) {
 		this.creationTime = creationTime;
+	}
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+	public String getDoctorId() {
+		return doctorId;
+	}
+	public void setDoctorId(String doctorId) {
+		this.doctorId = doctorId;
+	}
+	public String getEcgId() {
+		return ecgId;
+	}
+	public void setEcgId(String ecgId) {
+		this.ecgId = ecgId;
+	}
+	public int getStatus() {
+		return status;
+	}
+	public void setStatus(int status) {
+		this.status = status;
 	}
 }

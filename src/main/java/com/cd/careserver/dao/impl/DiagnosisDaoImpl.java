@@ -17,26 +17,30 @@ public class DiagnosisDaoImpl extends BasicDao<Diagnosis> implements
 
 	private static final String SQL_FIND_ALL = "SELECT * FROM diagnosis";
 
-	private static final String SQL_INSERT_DIAGNOSIS = "INSERT INTO diagnosis(id,doctor_ecg_id,message,"
-			+ "creation_time) " + "VALUES(?,?,?,now())";
+	private static final String SQL_INSERT_DIAGNOSIS = "INSERT INTO diagnosis(id,message,"
+			+ "customer_id,doctor_id,ecg_id,status,creation_time) "
+			+ "VALUES(?,?,?,?,?,?,now())";
 
 	private static final String SQL_DELETE_DIAGNOSIS = "DELETE FROM diagnosis WHERE id=?";
 
-	private static final String SQL_UPDATE_DIAGNOSIS = "UPDATE diagnosis SET doctor_ecg_id=?,message=?"
-			+ " WHERE id=?";
+	private static final String SQL_UPDATE_DIAGNOSIS = "UPDATE diagnosis SET message=?,"
+			+ "customer_id=?,doctor_id=?,ecg_id=?,status=? WHERE id=?";
 
 	private static final String SQL_FIND_DIAGNOSIS_BY_ID = "SELECT * FROM diagnosis WHERE id=?";
 
-	private static final String SQL_FIND_DIAGNOSISS_BY_IDS = "SELECT * FROM diagnosis WHERE id IN";
+	private static final String SQL_FIND_BY_ECG_ID_AND_DOCTOR_ID = "SELECT * FROM diagnosis WHERE ecg_id=? AND doctor_id=?";
 
 	private static class DiagnosisMultiRowMapper implements
 			MultiRowMapper<Diagnosis> {
 		public Diagnosis mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Diagnosis diagnosis = new Diagnosis();
 			diagnosis.setId(rs.getString("id"));
-			diagnosis.setDoctorEcgId(rs.getString("doctor_ecg_id"));
 			diagnosis.setMessage(rs.getString("message"));
 			diagnosis.setCreationTime(rs.getTimestamp("creation_time"));
+			diagnosis.setCustomerId(rs.getString("customer_id"));
+			diagnosis.setDoctorId(rs.getString("doctor_id"));
+			diagnosis.setEcgId(rs.getString("ecg_id"));
+			diagnosis.setStatus(rs.getInt("status"));
 			return diagnosis;
 		}
 	}
@@ -54,9 +58,13 @@ public class DiagnosisDaoImpl extends BasicDao<Diagnosis> implements
 
 	public String insert(Diagnosis diagnosis) {
 		diagnosis.setId(createId());
-		if (update(SQL_INSERT_DIAGNOSIS, new Object[] { diagnosis.getId(),
-				diagnosis.getDoctorEcgId(), diagnosis.getMessage() },
-				new int[] { Types.CHAR, Types.CHAR, Types.VARCHAR }) > 0) {
+		if (update(SQL_INSERT_DIAGNOSIS,
+				new Object[] { diagnosis.getId(), diagnosis.getMessage(),
+						diagnosis.getCustomerId(), diagnosis.getDoctorId(),
+						diagnosis.getEcgId(),
+						new Integer(diagnosis.getStatus()) }, new int[] {
+						Types.CHAR, Types.VARCHAR, Types.CHAR, Types.CHAR,
+						Types.CHAR, Types.INTEGER }) > 0) {
 			return diagnosis.getId();
 		} else {
 			return null;
@@ -74,9 +82,12 @@ public class DiagnosisDaoImpl extends BasicDao<Diagnosis> implements
 	public String update(Diagnosis diagnosis) {
 		if (update(
 				SQL_UPDATE_DIAGNOSIS,
-				new Object[] { diagnosis.getDoctorEcgId(),
-						diagnosis.getMessage(), diagnosis.getId() }, new int[] {
-						Types.CHAR, Types.VARCHAR, Types.CHAR }) > 0) {
+				new Object[] { diagnosis.getMessage(),
+						diagnosis.getCustomerId(), diagnosis.getDoctorId(),
+						diagnosis.getEcgId(),
+						new Integer(diagnosis.getStatus()), diagnosis.getId() },
+				new int[] { Types.VARCHAR, Types.CHAR, Types.CHAR, Types.CHAR,
+						Types.INTEGER, Types.CHAR }) > 0) {
 			return diagnosis.getId();
 		} else {
 			return null;
@@ -85,6 +96,13 @@ public class DiagnosisDaoImpl extends BasicDao<Diagnosis> implements
 
 	public Diagnosis findById(String diagnosisId) {
 		return (Diagnosis) query(SQL_FIND_DIAGNOSIS_BY_ID, diagnosisId,
+				new DiagnosisSingleRowMapper());
+	}
+
+	@Override
+	public Diagnosis findByEcgIdAndDoctorId(String diaId, String doctorId) {
+		return (Diagnosis) query(SQL_FIND_BY_ECG_ID_AND_DOCTOR_ID,
+				new String[] { diaId, doctorId },
 				new DiagnosisSingleRowMapper());
 	}
 }

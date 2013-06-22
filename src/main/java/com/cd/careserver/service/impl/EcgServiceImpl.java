@@ -43,10 +43,11 @@ public class EcgServiceImpl implements EcgService {
 
 	@Override
 	public DataModel loadEcgData(String ecgId) {
-		EcgData ecg = ecgDataDao.findById(ecgId);
-		String filepath = fileTransferService.retrieveFtpFile(
-				ecg.getCustomerId(), ecg.getFileLocation());
-		return new DataDecoder().getData(filepath);
+//		EcgData ecg = ecgDataDao.findById(ecgId);
+//		String filepath = fileTransferService.retrieveFtpFile(
+//				ecg.getCustomerId(), ecg.getFileLocation());
+//		return new DataDecoder().getData(filepath);
+		return new DataModel();
 	}
 	
 	@Override

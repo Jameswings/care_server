@@ -87,6 +87,7 @@ create table diagnosis
    ecg_id               char(32),
    customer_id          char(32),
    doctor_id            char(32),
+   status               int(2),
    message              varchar(1024),
    creation_time        datetime,
    primary key (id)

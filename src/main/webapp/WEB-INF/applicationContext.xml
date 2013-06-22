@@ -80,7 +80,7 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <property name="driverClass" value="com.mysql.jdbc.Driver" />
     <property name="jdbcUrl" value="jdbc:mysql://localhost:3306/care_server?autoReconnect=true&amp;unicode=true&amp;characterEncoding=utf8" />
     <property name="user" value="root" />
-    <property name="password" value="root" />
+    <property name="password" value="" />
 
     <!--连接池中保留的最小连接数。 -->
     <property name="minPoolSize" value="10" />
@@ -203,7 +203,12 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
   </bean>
   <bean id="diagnosisService" class="com.cd.careserver.service.impl.DiagnosisServiceImpl" >
     <property name="diagnosisDao" ref="diagnosisDao" />
+    <property name="pendingResponseService" ref="pendingResponseService" />
   </bean>
+  <bean id="pendingResponseService" class="com.cd.careserver.service.impl.PendingResponseServiceImpl" >
+    <property name="pendingResponseDao" ref="pendingResponseDao" />
+  </bean>
+  
 
    	<!-- Daos -->
    	<!-- Daos -->
@@ -232,6 +237,9 @@ http://www.springframework.org/schema/tx http://www.springframework.org/schema/t
     <property name="dataSource" ref="c3p0DataSource" />
   </bean>
   <bean id="diagnosisDao" class="com.cd.careserver.dao.impl.DiagnosisDaoImpl">
+    <property name="dataSource" ref="c3p0DataSource" />
+  </bean>
+  <bean id="pendingResponseDao" class="com.cd.careserver.dao.impl.PendingResponseDaoImpl">
     <property name="dataSource" ref="c3p0DataSource" />
   </bean>
   

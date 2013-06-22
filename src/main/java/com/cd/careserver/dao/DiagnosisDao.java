@@ -16,4 +16,6 @@ public interface DiagnosisDao {
 
 	List<Diagnosis> findAll();
 
+	Diagnosis findByEcgIdAndDoctorId(String diaId, String doctorId);
+
 }
