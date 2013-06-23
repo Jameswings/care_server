@@ -198,6 +198,7 @@ create table pending_response
    message              varchar(256),
    cmd                  varchar(128),
    type                 int(3),
+   target_id            char(32),
    from_type            int(2),
    from_id              char(32),
    to_type              int(2),

@@ -7,19 +7,19 @@ public class DiagnosisAction extends APIAction {
 
 	private DiagnosisService diagnosisService;
 	
-	
-	private String ecgId;
+	private String diagnosisId;
 	
 	public String retrieve(){
+		reply.setValue(diagnosisService.getDiagnosisById(diagnosisId));
 		return JSON;
 	}
 
-	public String getEcgId() {
-		return ecgId;
+	public String getDiagnosisId() {
+		return diagnosisId;
 	}
 
-	public void setEcgId(String ecgId) {
-		this.ecgId = ecgId;
+	public void setDiagnosisId(String diagnosisId) {
+		this.diagnosisId = diagnosisId;
 	}
 
 	public void setDiagnosisService(DiagnosisService diagnosisService) {

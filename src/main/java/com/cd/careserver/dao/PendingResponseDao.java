@@ -14,4 +14,6 @@ public interface PendingResponseDao {
 
 	PendingResponse findById(String pendingResponseId);
 
+	List<PendingResponse> findByCustomerId(String customerId);
+
 }

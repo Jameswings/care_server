@@ -7,6 +7,7 @@ public class PendingResponse {
 	private String message;
 	private String cmd;
 	private int type;
+	private String targetId;
 	private int fromType;
 	private String fromId;
 	private int toType;
@@ -66,5 +67,11 @@ public class PendingResponse {
 	}
 	public void setCreationTime(Date creationTime) {
 		this.creationTime = creationTime;
+	}
+	public String getTargetId() {
+		return targetId;
+	}
+	public void setTargetId(String targetId) {
+		this.targetId = targetId;
 	}
 }

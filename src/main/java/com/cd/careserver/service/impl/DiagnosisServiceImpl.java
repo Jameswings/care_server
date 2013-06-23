@@ -17,6 +17,10 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 		return diagnosisDao.findByEcgIdAndDoctorId(ecgId, docId);
 	}
 	
+	public Diagnosis getDiagnosisById(String diaId){
+		return diagnosisDao.findById(diaId);
+	}
+	
 	public String saveDiagnosis(Diagnosis diagnosis){
 		String id = diagnosisDao.insert(diagnosis);
 		if (id != null){
@@ -26,6 +30,7 @@ public class DiagnosisServiceImpl implements DiagnosisService {
 			response.setFromType(UserType.DOCTOR.getValue());
 			response.setToId(diagnosis.getCustomerId());
 			response.setToType(UserType.CUSTOMER.getValue());
+			response.setTargetId(id);
 			response.setMessage("empty");
 			response.setCmd("empty");
 			responseService.addResponse(response);
